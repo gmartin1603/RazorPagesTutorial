@@ -8,8 +8,18 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a class="btn btn-success" asp-page="Create">Create New</a>
 </p>
+<form>
+    <p>
+        <select asp-for="MovieGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+        Title: <input type="text" asp-for="SearchString" />
+        <input class="btn btn-primary" type="submit" value="Filter" />
+        <a class="btn btn-danger" type="button" value="Reset" asp-page="/Movies/Index">Reset</a>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -24,6 +34,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Movie[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movie[0].Rating)
             </th>
             <th></th>
         </tr>
@@ -44,9 +57,12 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="Delete" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
